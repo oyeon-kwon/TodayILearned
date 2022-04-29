@@ -4,10 +4,42 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+
+const like = 0;
+
+// ! 여기서 변수에 익명 함수를 할당했습니다.
+const test = function () {
+  console.log('click!')
+}
+
+// action
+function hello(state = like, action) {
+    if (action.type == "increase") {
+      state++;
+      //! 여기서 전역변수를 호출했습니다.
+      test()
+      return state;
+    } else if (action.type == "decrease") {
+      state--;
+      return state;
+    } else {
+      return state;
+    }
+
+    
+  }
+
+// store
+let store = createStore(hello);
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>
 );
 
